@@ -1,0 +1,32 @@
+#!name=Telegram 广告屏蔽
+#!desc=屏蔽 Telegram 频道中的赞助广告和推广内容
+#!author=Loon Telegram AdBlocker
+#!homepage=https://github.com/loon-telegram-adblocker
+#!icon=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png
+#!openUrl=https://t.me
+#!tag=广告屏蔽
+#!system=ios
+#!loon_version=3.2.0
+
+[Rule]
+# 屏蔽 Telegram 广告和追踪相关域名
+DOMAIN-SUFFIX,telega.io,REJECT
+DOMAIN-SUFFIX,tgads.io,REJECT
+DOMAIN-SUFFIX,tgadvertise.com,REJECT
+DOMAIN-SUFFIX,graph.facebook.com,REJECT
+DOMAIN-SUFFIX,graph.instagram.com,REJECT
+
+[URL Rewrite]
+# 屏蔽广告相关的 URL 请求
+^https?:\/\/telegram\.me\/adsgram - reject
+^https?:\/\/telegram\.org\/adsgram - reject
+
+[Script]
+# 处理 Telegram API 响应，移除赞助内容
+http-response ^https?:\/\/.*\.telegram\.org\/.*$ script-path=https://raw.githubusercontent.com/loon-telegram-adblocker/main/telegram-adblocker.js, requires-body=true, timeout=30, tag=Telegram去广告
+
+# 处理移动端 API
+http-response ^https?:\/\/api\.telegram\.org\/.*$ script-path=https://raw.githubusercontent.com/loon-telegram-adblocker/main/telegram-adblocker.js, requires-body=true, timeout=30, tag=Telegram去广告API
+
+[MITM]
+hostname = *.telegram.org, api.telegram.org

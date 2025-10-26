@@ -1,0 +1,38 @@
+# Telegram 广告拦截规则集
+# 更新时间：2024-01-XX
+# 适用于 Loon / Surge / Quantumult X
+
+# Telegram 广告域名
+DOMAIN-SUFFIX,telega.io
+DOMAIN-SUFFIX,tgads.io
+DOMAIN-SUFFIX,tgadvertise.com
+DOMAIN-SUFFIX,telegram-ads.com
+DOMAIN-SUFFIX,tg-ads.com
+
+# 广告追踪域名
+DOMAIN-SUFFIX,graph.facebook.com
+DOMAIN-SUFFIX,graph.instagram.com
+DOMAIN-SUFFIX,connect.facebook.net
+DOMAIN-SUFFIX,an.facebook.com
+
+# 广告统计和分析
+DOMAIN-SUFFIX,google-analytics.com
+DOMAIN-SUFFIX,googletagmanager.com
+DOMAIN-SUFFIX,doubleclick.net
+DOMAIN-SUFFIX,googlesyndication.com
+
+# 移动广告网络
+DOMAIN-SUFFIX,applovin.com
+DOMAIN-SUFFIX,mopub.com
+DOMAIN-SUFFIX,adcolony.com
+DOMAIN-SUFFIX,chartboost.com
+
+# Telegram 相关第三方广告
+DOMAIN-KEYWORD,adsgram
+DOMAIN-KEYWORD,telegram-ad
+DOMAIN-KEYWORD,tg-promo
+
+# URL 关键字拦截
+URL-REGEX,^https?:\/\/.*telegram.*\/ad
+URL-REGEX,^https?:\/\/.*telegram.*\/promo
+URL-REGEX,^https?:\/\/.*telegram.*\/sponsor
