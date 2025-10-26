@@ -1,5 +1,5 @@
 #!name=Telegram 广告屏蔽
-#!desc=屏蔽 Telegram 频道中的赞助广告和推广内容
+#!desc=屏蔽 Telegram 频道中的赞助广告和推广内容（增强版）
 #!author=Loon Telegram AdBlocker
 #!homepage=https://github.com/g1z2f/loon-telegram-adblocker-
 #!icon=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png
@@ -13,6 +13,7 @@
 DOMAIN-SUFFIX,telega.io,REJECT
 DOMAIN-SUFFIX,tgads.io,REJECT
 DOMAIN-SUFFIX,tgadvertise.com,REJECT
+DOMAIN-SUFFIX,telegram-ads.com,REJECT
 DOMAIN-SUFFIX,graph.facebook.com,REJECT
 DOMAIN-SUFFIX,graph.instagram.com,REJECT
 
@@ -20,14 +21,22 @@ DOMAIN-SUFFIX,graph.instagram.com,REJECT
 # 屏蔽广告相关的 URL 请求
 ^https?:\/\/telegram\.me\/adsgram - reject
 ^https?:\/\/telegram\.org\/adsgram - reject
+^https?:\/\/.*\.telegram\.org\/.*\/sponsor - reject
+^https?:\/\/.*\.telegram\.org\/.*\/promoted - reject
 
 [Script]
-# 处理 Telegram API 响应，移除赞助内容
-http-response ^https?:\/\/.*\.telegram\.org\/.*$ script-path=https://raw.githubusercontent.com/g1z2f/loon-telegram-adblocker-/main/telegram-adblocker.js, requires-body=true, timeout=30, tag=Telegram去广告
+# 处理 Telegram Web API 响应，移除赞助内容
+http-response ^https?:\/\/.*\.telegram\.org\/.*$ script-path=https://raw.githubusercontent.com/g1z2f/loon-telegram-adblocker-/main/telegram-adblocker.js, requires-body=true, timeout=30, tag=Telegram去广告Web
 
-# 处理移动端 API
+# 处理移动端 API v1
 http-response ^https?:\/\/api\.telegram\.org\/.*$ script-path=https://raw.githubusercontent.com/g1z2f/loon-telegram-adblocker-/main/telegram-adblocker.js, requires-body=true, timeout=30, tag=Telegram去广告API
 
+# 处理移动端 API v2
+http-response ^https?:\/\/apiv2\.telegram\.org\/.*$ script-path=https://raw.githubusercontent.com/g1z2f/loon-telegram-adblocker-/main/telegram-adblocker.js, requires-body=true, timeout=30, tag=Telegram去广告APIv2
+
+# 处理移动端 API v3
+http-response ^https?:\/\/apiv3\.telegram\.org\/.*$ script-path=https://raw.githubusercontent.com/g1z2f/loon-telegram-adblocker-/main/telegram-adblocker.js, requires-body=true, timeout=30, tag=Telegram去广告APIv3
+
 [MITM]
-hostname = *.telegram.org, api.telegram.org
+hostname = *.telegram.org, api.telegram.org, apiv2.telegram.org, apiv3.telegram.org, web.telegram.org
 

@@ -8,6 +8,57 @@
 
 待发布的功能和修复...
 
+## [2.0.0] - 2024-10-26
+
+### 新增功能
+
+- ✨ 大幅增强 Telegram 赞助消息拦截能力
+- ✨ 新增支持多个 Telegram API 域名变体：
+  - `apiv2.telegram.org`
+  - `apiv3.telegram.org`
+  - `web.telegram.org`
+- ✨ 新增专门的 Telegram 响应结构清理函数 `cleanTelegramResponse()`
+- ✨ 新增广告移除计数功能，实时统计拦截数量
+- ✨ 新增调试模式开关（DEBUG_MODE），便于问题诊断
+- ✨ 新增日志函数，提供更清晰的日志输出
+
+### 改进
+
+- 🔧 大幅改进广告识别算法，新增多种检测规则：
+  - 检测 `random_id` + `from_id` + `chat_invite` 组合
+  - 检测 `peer_color` + `chat_invite_hash` 组合
+  - 检测 `recommended` 和 `recommendation_reason` 字段
+  - 检测包含 sponsor/adsgram 的 URL
+  - 智能检测消息文本特征
+- 🔧 优化递归广告移除逻辑，返回处理统计信息
+- 🔧 增强对频道完整信息（full_chat/fullChat）的处理
+- 🔧 直接处理 `sponsoredMessages` 和 `sponsored_messages` 数组字段
+- 🔧 改进日志输出，使用 ✓ 和 ❌ 符号提升可读性
+- 🔧 优化性能，避免重复处理
+
+### 文档
+
+- 📝 完全重写 README.md 验证和故障排查部分
+- 📝 新增详细的日志查看方法说明
+- 📝 新增视觉验证步骤说明
+- 📝 新增 4 个常见问题的详细排查指南
+- 📝 添加日志输出示例
+- 📝 更新版本号到 v2.0.0
+
+### 配置
+
+- ⚙️ 插件描述更新为"增强版"
+- ⚙️ 新增 2 条 URL Rewrite 规则（sponsor/promoted）
+- ⚙️ 新增针对 apiv2 和 apiv3 的 Script 配置
+- ⚙️ 扩展 MITM hostname 列表
+- ⚙️ 新增广告关键字：`sponsoredmessage`、`peer_color`、`sponsor`
+
+### 修复
+
+- 🐛 修复广告字段检测不全面的问题
+- 🐛 修复某些赞助消息结构无法识别的问题
+- 🐛 修复频道顶部赞助消息（蓝色"广告"标签）拦截失效的问题
+
 ## [1.0.0] - 2024-01-XX
 
 ### 新增功能
