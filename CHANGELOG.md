@@ -8,6 +8,89 @@
 
 待发布的功能和修复...
 
+## [3.0.0] - 2024-10-26
+
+### 重大更新 - Telegram 去广告插件完全重写（基于技术研究）
+
+基于对成熟仓库的深入研究，完全重写 Telegram 去广告插件，明确技术限制：
+- [fmz200/wool_scripts](https://github.com/fmz200/wool_scripts) - 730+ 应用去广告集合
+- [PixivCat/Loon](https://github.com/PixivCat/Loon) - 高质量 Loon 插件
+
+#### 🔍 研究发现
+- ❌ **fmz200/wool_scripts 没有 Telegram 去广告插件**（虽然有 730+ 应用）
+- ❌ **PixivCat/Loon 仅有 Telegram DC 路由优化**（没有去广告）
+- 🔒 **技术原因：MTProto 协议无法被 MITM 解密**
+- ✅ **成熟仓库的缺失证明了技术不可行性**
+
+#### Changed - TelegramAdBlock.plugin 完全重写
+- ✅ 采用成熟仓库的标准格式（元数据、注释风格）
+- ✅ 添加详细的技术限制说明（MTProto 协议限制）
+- ✅ 移除对原生 App 的无效拦截规则
+- ✅ 聚焦于 Web 版本（web.telegram.org）
+- ✅ 简化 MITM 域名（仅保留 web.telegram.org）
+- ✅ 禁用无效的 API 拦截脚本（enable=false）
+- ✅ 使用 `reject-drop` 策略（参考成熟仓库）
+- ✅ 添加完整的技术说明注释
+
+#### Changed - telegram-adblocker.js 重写
+- ✅ 从 340 行重构到 297 行（更精简）
+- ✅ 添加 MTProto 协议限制说明
+- ✅ 添加二进制数据检测（MTProto 检测）
+- ✅ 聚焦于 Telegram Web API 响应处理
+- ✅ 改进日志级别系统（INFO/WARN/ERROR/DEBUG）
+- ✅ 添加响应格式验证（isValidTelegramResponse）
+- ✅ 优化 Web API 响应处理逻辑
+- ✅ 移除对原生 App API 的误导性处理
+- ✅ 添加清晰的替代方案说明
+
+#### Changed - README.md 完全重写
+- ✅ 添加 "重要技术说明" 章节
+- ✅ 详细解释 MTProto 协议限制
+- ✅ 添加参考仓库研究结果章节
+- ✅ 明确说明插件能做什么和不能做什么
+- ✅ 添加 "有效的替代方案" 章节：
+  - Telegram Premium（推荐）
+  - 第三方客户端（Nicegram）
+  - 桌面修改版
+- ✅ 添加技术原理图解（ASCII 图表）
+- ✅ 重写常见问题（诚实回答技术限制）
+- ✅ 添加参考研究详细说明
+- ✅ 更新插件定位（教育和引导）
+- ✅ 改进免责声明（明确技术限制）
+
+#### Added - TECHNICAL_RESEARCH.md
+- ✅ 新增完整的技术研究报告
+- ✅ 详细记录两个参考仓库的研究过程
+- ✅ MTProto 协议深度技术分析
+- ✅ MITM 工作原理对比说明
+- ✅ Telegram 广告加载机制分析
+- ✅ 五种技术方案的可行性评估
+- ✅ 研究结论和推荐方案
+- ✅ 完整的参考资料链接
+
+#### 🎯 插件新定位
+**诚实第一，用户体验至上：**
+- ✅ 明确告知技术限制（MTProto 无法拦截）
+- ✅ 不做虚假宣传（不声称能拦截原生 App）
+- ✅ 推荐真正有效的方案（Telegram Premium）
+- ✅ 提供技术教育价值（理解协议限制）
+- ✅ 对 Web 版提供有限支持
+
+#### 🔬 技术亮点
+- ✅ 基于实际研究（clone 并分析了参考仓库）
+- ✅ 遵循成熟仓库的格式规范
+- ✅ 深入理解 MTProto vs HTTPS 的区别
+- ✅ 提供完整的技术文档
+- ✅ 教育用户而非误导用户
+
+### 技术负责任原则
+本次重写遵循 "技术负责任" 原则：
+1. 诚实说明技术限制
+2. 不给用户虚假希望
+3. 推荐真正有效的方案
+4. 提供完整的技术说明
+5. 尊重加密协议的设计
+
 ## [2.2.0] - 2024-10-26
 
 ### 重大更新 - 美团去广告插件完全重写
