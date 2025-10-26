@@ -10,26 +10,35 @@ loon-telegram-adblocker/
 ├── .gitignore                      # Git 忽略文件配置
 ├── LICENSE                         # MIT 开源许可证
 ├── README.md                       # 项目主文档（中文）
-├── INSTALLATION.md                 # 详细安装指南
+├── INSTALLATION.md                 # Telegram 插件详细安装指南
+├── INSTALLATION_MEITUAN.md         # 美团插件详细安装指南
+├── QUICKSTART_MEITUAN.md           # 美团插件快速开始指南
+├── README_MEITUAN.md               # 美团插件完整文档
 ├── CHANGELOG.md                    # 版本更新日志
 ├── CONTRIBUTING.md                 # 贡献指南
 ├── PROJECT_STRUCTURE.md            # 本文件 - 项目结构说明
-├── TelegramAdBlock.plugin          # 主插件配置文件
-├── telegram-adblocker.js           # 核心 JavaScript 脚本
+├── TelegramAdBlock.plugin          # Telegram 插件配置文件
+├── MeituanAdBlock.plugin           # 美团插件配置文件
+├── telegram-adblocker.js           # Telegram 核心 JavaScript 脚本
+├── meituan-adblocker.js            # 美团核心 JavaScript 脚本
 ├── examples/                       # 配置示例目录
 │   ├── README.md                   # 示例说明文档
-│   ├── local-config.plugin         # 本地托管配置示例
-│   └── advanced-config.plugin      # 高级配置示例
+│   ├── local-config.plugin         # Telegram 本地托管配置示例
+│   ├── advanced-config.plugin      # Telegram 高级配置示例
+│   └── meituan-local-config.plugin # 美团本地托管配置示例
 └── rules/                          # 规则集目录
-    └── telegram-ads.list           # Telegram 广告拦截规则
+    ├── telegram-ads.list           # Telegram 广告拦截规则
+    └── meituan-ads.list            # 美团广告拦截规则
 
 ```
 
 ## 核心文件
 
-### TelegramAdBlock.plugin
+### Telegram 插件
 
-**用途**：Loon 插件主配置文件
+#### TelegramAdBlock.plugin
+
+**用途**：Telegram 广告屏蔽插件配置文件
 
 **包含内容**：
 - 插件元信息（名称、描述、作者等）
@@ -43,9 +52,9 @@ loon-telegram-adblocker/
 在 Loon 中直接导入此文件的 URL
 ```
 
-### telegram-adblocker.js
+#### telegram-adblocker.js
 
-**用途**：核心广告过滤脚本
+**用途**：Telegram 广告过滤脚本
 
 **主要功能**：
 - 拦截 Telegram API 响应
@@ -59,6 +68,58 @@ loon-telegram-adblocker/
 - `removeAds()` - 递归广告移除
 - `isAdContent()` - 广告内容识别
 - `isAdField()` - 广告字段识别
+- `cleanTelegramResponse()` - Telegram 专用清理
+
+**运行环境**：
+- Loon 脚本引擎
+- 支持 ES6 语法
+- 可访问 `$response` 和 `$done` 对象
+
+### 美团插件
+
+#### MeituanAdBlock.plugin
+
+**用途**：美团开屏广告屏蔽插件配置文件
+
+**包含内容**：
+- 插件元信息（名称、描述、作者等）
+- 美团广告域名拦截规则
+- 开屏广告 URL 重写规则
+- 多个 API 脚本拦截配置
+- 美团相关 MITM 主机名列表
+
+**特点**：
+- 针对美团多个子域名和 API
+- 拦截开屏广告图片和视频资源
+- 处理外卖、团购等多个模块
+
+**使用方式**：
+```
+在 Loon 中直接导入此文件的 URL
+```
+
+#### meituan-adblocker.js
+
+**用途**：美团广告过滤脚本
+
+**主要功能**：
+- 拦截美团 API 响应
+- 移除开屏广告数据
+- 过滤首页推荐流广告
+- 处理多种美团广告格式
+- 优化启动速度
+
+**关键函数**：
+- `handleResponse()` - 主处理函数
+- `cleanMeituanResponse()` - 美团专用清理
+- `cleanMeituanData()` - 数据递归清理
+- `isMeituanAd()` - 美团广告识别
+- `removeAds()` - 通用递归移除
+
+**美团特定处理**：
+- 识别开屏广告字段（splashAd、launchAd 等）
+- 处理美团 API 响应结构（data/result 包装）
+- 检测推广类型标识（itemType、contentType 等）
 
 **运行环境**：
 - Loon 脚本引擎
@@ -69,10 +130,11 @@ loon-telegram-adblocker/
 
 ### README.md
 
-**用途**：项目主文档
+**用途**：项目主文档（包含插件集合概览）
 
 **内容**：
-- 项目简介和功能特性
+- 项目简介和所有插件列表
+- Telegram 插件功能特性
 - 系统要求
 - 快速安装步骤
 - 基本使用说明
@@ -83,9 +145,26 @@ loon-telegram-adblocker/
 
 **受众**：所有用户
 
+### README_MEITUAN.md
+
+**用途**：美团插件专用完整文档
+
+**内容**：
+- 美团插件功能特性
+- 详细的安装步骤
+- MITM 配置指南
+- 使用说明和效果验证
+- 完整的故障排查指南
+- 技术原理说明
+- 支持的域名和接口列表
+- 效果对比数据
+- 开发和贡献指南
+
+**受众**：美团插件用户
+
 ### INSTALLATION.md
 
-**用途**：详细安装和配置指南
+**用途**：Telegram 插件详细安装和配置指南
 
 **内容**：
 - 分步安装说明（带截图说明位置）
@@ -95,7 +174,35 @@ loon-telegram-adblocker/
 - 高级配置选项
 - 卸载方法
 
-**受众**：新手用户、需要详细指导的用户
+**受众**：Telegram 插件新手用户、需要详细指导的用户
+
+### INSTALLATION_MEITUAN.md
+
+**用途**：美团插件详细安装和配置指南
+
+**内容**：
+- 美团插件分步安装说明
+- MITM 证书配置（针对美团域名）
+- 插件导入和启用步骤
+- 效果验证方法
+- 完整的问题排查流程
+- iOS 各版本差异说明
+- 进阶配置选项
+
+**受众**：美团插件新手用户、需要详细指导的用户
+
+### QUICKSTART_MEITUAN.md
+
+**用途**：美团插件快速开始指南
+
+**内容**：
+- 5 分钟快速配置流程
+- 三步安装说明
+- 快速检查清单
+- 通用问题快速解决方案
+- 期望效果说明
+
+**受众**：希望快速上手的用户
 
 ### CHANGELOG.md
 

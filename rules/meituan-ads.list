@@ -1,0 +1,20 @@
+# 美团广告拦截规则列表
+# Meituan Ad Blocking Rules
+
+# 广告域名
+DOMAIN,ad.meituan.com
+DOMAIN,ads.meituan.com
+DOMAIN,analytics.meituan.com
+DOMAIN,tracker.meituan.com
+DOMAIN,adlog.meituan.com
+DOMAIN,report.meituan.com
+DOMAIN,adashx.m.taobao.com
+DOMAIN,apoll.m.taobao.com
+
+# 广告 URL 路径匹配
+URL-REGEX,^https?:\/\/img\.meituan\.net\/(adunion|advertisement|mallcube|ad)\/.+
+URL-REGEX,^https?:\/\/p\d\.meituan\.net\/(adunion|advertisement|mallcube|ad)\/.+
+URL-REGEX,^https?:\/\/s3plus\.meituan\.net\/.+\/(ad|splash|launch)\/.+
+URL-REGEX,^https?:\/\/.*\.meituan\.com\/.*\/ad\/.+
+URL-REGEX,^https?:\/\/.*\.meituan\.com\/.*\/splash\/.+
+URL-REGEX,^https?:\/\/.*\.sankuai\.com\/.*\/(ad|splash|launch)\/.+
