@@ -32,10 +32,10 @@
 
 **步骤 1：复制插件 URL**
 
-复制以下链接（将来需要替换为实际的 GitHub 链接）：
+复制以下链接：
 
 ```
-https://raw.githubusercontent.com/YOUR-USERNAME/loon-telegram-adblocker/main/TelegramAdBlock.plugin
+https://raw.githubusercontent.com/g1z2f/loon-telegram-adblocker-/main/TelegramAdBlock.plugin
 ```
 
 **步骤 2：在 Loon 中导入**

@@ -1,7 +1,7 @@
 #!name=Telegram 广告屏蔽（高级配置）
 #!desc=包含更多自定义选项的高级配置示例
 #!author=Loon Telegram AdBlocker
-#!homepage=https://github.com/loon-telegram-adblocker
+#!homepage=https://github.com/g1z2f/loon-telegram-adblocker-
 #!icon=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png
 #!tag=广告屏蔽, 高级配置
 
@@ -54,10 +54,10 @@ DOMAIN-KEYWORD,telemetry,REJECT
 
 [Script]
 # 主要 API 响应过滤
-http-response ^https?:\/\/.*\.telegram\.org\/.*$ script-path=https://raw.githubusercontent.com/loon-telegram-adblocker/main/telegram-adblocker.js, requires-body=true, timeout=60, tag=Telegram去广告主
+http-response ^https?:\/\/.*\.telegram\.org\/.*$ script-path=https://raw.githubusercontent.com/g1z2f/loon-telegram-adblocker-/main/telegram-adblocker.js, requires-body=true, timeout=60, tag=Telegram去广告主
 
 # 备用 API 端点
-http-response ^https?:\/\/api\.telegram\.org\/.*$ script-path=https://raw.githubusercontent.com/loon-telegram-adblocker/main/telegram-adblocker.js, requires-body=true, timeout=60, tag=Telegram去广告API
+http-response ^https?:\/\/api\.telegram\.org\/.*$ script-path=https://raw.githubusercontent.com/g1z2f/loon-telegram-adblocker-/main/telegram-adblocker.js, requires-body=true, timeout=60, tag=Telegram去广告API
 
 # 如果有特殊 CDN 或区域端点，可以添加
 # http-response ^https?:\/\/[a-z]+[0-9]+-[0-9]+\.telegram\.org\/.*$ script-path=..., requires-body=true, timeout=60, tag=Telegram去广告CDN

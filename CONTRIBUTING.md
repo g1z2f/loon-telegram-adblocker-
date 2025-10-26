@@ -33,8 +33,8 @@
 1. **Fork 仓库**到您的 GitHub 账号
 2. **Clone** 您的 Fork：
    ```bash
-   git clone https://github.com/YOUR-USERNAME/loon-telegram-adblocker.git
-   cd loon-telegram-adblocker
+   git clone https://github.com/YOUR-USERNAME/loon-telegram-adblocker-.git
+   cd loon-telegram-adblocker-
    ```
 3. **创建分支**：
    ```bash

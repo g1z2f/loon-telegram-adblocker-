@@ -18,7 +18,7 @@
 
 1. **复制这个链接**：
    ```
-   https://raw.githubusercontent.com/YOUR-USERNAME/loon-telegram-adblocker/main/TelegramAdBlock.plugin
+   https://raw.githubusercontent.com/g1z2f/loon-telegram-adblocker-/main/TelegramAdBlock.plugin
    ```
 
 2. **打开 Loon** → 点击底部 **「配置」**
@@ -131,8 +131,8 @@
 
 ### 获取支持
 
-- 🐛 [报告问题](https://github.com/loon-telegram-adblocker/issues)
-- 💬 [社区讨论](https://github.com/loon-telegram-adblocker/discussions)
+- 🐛 [报告问题](https://github.com/g1z2f/loon-telegram-adblocker-/issues)
+- 💬 [社区讨论](https://github.com/g1z2f/loon-telegram-adblocker-/discussions)
 
 ## 🎯 下一步
 
@@ -162,6 +162,6 @@
 
 ---
 
-**遇到问题？** 不要慌张，查看 [详细安装指南](INSTALLATION.md) 或 [提交 Issue](https://github.com/loon-telegram-adblocker/issues)
+**遇到问题？** 不要慌张，查看 [详细安装指南](INSTALLATION.md) 或 [提交 Issue](https://github.com/g1z2f/loon-telegram-adblocker-/issues)
 
 **觉得有用？** 欢迎 ⭐ Star 本项目并分享给朋友！

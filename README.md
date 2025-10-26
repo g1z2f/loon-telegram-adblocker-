@@ -27,7 +27,7 @@
 
 1. **复制插件链接**：
    ```
-   https://raw.githubusercontent.com/loon-telegram-adblocker/main/TelegramAdBlock.plugin
+   https://raw.githubusercontent.com/g1z2f/loon-telegram-adblocker-/main/TelegramAdBlock.plugin
    ```
 
 2. **在 Loon 中导入插件**：
@@ -163,8 +163,8 @@
 
 1. **克隆仓库**：
    ```bash
-   git clone https://github.com/loon-telegram-adblocker/loon-telegram-adblocker.git
-   cd loon-telegram-adblocker
+   git clone https://github.com/g1z2f/loon-telegram-adblocker-.git
+   cd loon-telegram-adblocker-
    ```
 
 2. **修改脚本**：
@@ -224,8 +224,8 @@
 
 ## 📮 联系方式
 
-- **Issues**: [GitHub Issues](https://github.com/loon-telegram-adblocker/loon-telegram-adblocker/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/loon-telegram-adblocker/loon-telegram-adblocker/discussions)
+- **Issues**: [GitHub Issues](https://github.com/g1z2f/loon-telegram-adblocker-/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/g1z2f/loon-telegram-adblocker-/discussions)
 
 ---
 
