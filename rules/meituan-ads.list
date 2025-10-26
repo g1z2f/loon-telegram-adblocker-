@@ -1,20 +1,31 @@
 # 美团广告拦截规则列表
 # Meituan Ad Blocking Rules
+# 参考来源：
+# - https://github.com/fmz200/wool_scripts
+# - https://github.com/PixivCat/Loon
 
-# 广告域名
-DOMAIN,ad.meituan.com
-DOMAIN,ads.meituan.com
-DOMAIN,analytics.meituan.com
-DOMAIN,tracker.meituan.com
-DOMAIN,adlog.meituan.com
-DOMAIN,report.meituan.com
-DOMAIN,adashx.m.taobao.com
-DOMAIN,apoll.m.taobao.com
+# 美团广告域名
+DOMAIN,ad.meituan.com,REJECT
+DOMAIN,ads.meituan.com,REJECT
+DOMAIN,analytics.meituan.com,REJECT
+DOMAIN,adlog.meituan.com,REJECT
+DOMAIN,report.meituan.com,REJECT
+DOMAIN,babel-statistics-android.d.meituan.net,REJECT
+DOMAIN,maplocatesdksnapshot.d.meituan.net,REJECT
+DOMAIN,metrics-picture.d.meituan.net,REJECT
+DOMAIN,route-stats.d.meituan.net,REJECT
 
-# 广告 URL 路径匹配
-URL-REGEX,^https?:\/\/img\.meituan\.net\/(adunion|advertisement|mallcube|ad)\/.+
-URL-REGEX,^https?:\/\/p\d\.meituan\.net\/(adunion|advertisement|mallcube|ad)\/.+
+# 三快科技（美团母公司）广告域名
+DOMAIN,adserver.union.sankuai.com,REJECT
+DOMAIN,adstatic.meituan.com,REJECT
+
+# 美团广告 URL 路径匹配
+URL-REGEX,^https?:\/\/img\.meituan\.net\/(adunion|advertisement|mallcube|bizad)\/.+
+URL-REGEX,^https?:\/\/p\d\.meituan\.net\/(adunion|advertisement|mallcube|bizad)\/.+
 URL-REGEX,^https?:\/\/s3plus\.meituan\.net\/.+\/(ad|splash|launch)\/.+
-URL-REGEX,^https?:\/\/.*\.meituan\.com\/.*\/ad\/.+
-URL-REGEX,^https?:\/\/.*\.meituan\.com\/.*\/splash\/.+
-URL-REGEX,^https?:\/\/.*\.sankuai\.com\/.*\/(ad|splash|launch)\/.+
+URL-REGEX,^https?:\/\/(api|wmapi|peisongapi|promotion)\.meituan\.com\/.+\/advert
+URL-REGEX,^https?:\/\/.*\.meituan\.com\/.*\/ad[sv]?\/
+URL-REGEX,^https?:\/\/.*\.meituan\.com\/.*\/splash\/
+URL-REGEX,^https?:\/\/.*\.meituan\.com\/.*\/resource\?.*adKey
+URL-REGEX,^https?:\/\/.*\.sankuai\.com\/.*\/(ad|splash|launch)\/
+URL-REGEX,^https?:\/\/.*\.sankuai\.com\/.+\/advert
