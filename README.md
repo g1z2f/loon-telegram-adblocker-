@@ -1,10 +1,27 @@
-# Telegram 广告屏蔽 Loon 插件
+# Loon 广告屏蔽插件集合
 
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Loon](https://img.shields.io/badge/Loon-3.2.0%2B-orange.svg)](https://nsloon.com/)
 [![Telegram](https://img.shields.io/badge/Telegram-Supported-blue.svg)](https://telegram.org/)
+[![Meituan](https://img.shields.io/badge/Meituan-Supported-yellow.svg)](https://www.meituan.com/)
 
-一个用于 iOS Loon 应用的 Telegram 广告屏蔽插件，能够有效移除 Telegram 频道中的赞助广告和推广内容。
+iOS Loon 应用的广告屏蔽插件集合，包含多个常用 App 的广告屏蔽功能。
+
+## 📦 包含的插件
+
+### 1. Telegram 广告屏蔽插件
+能够有效移除 Telegram 频道中的赞助广告和推广内容。
+
+**[查看详细文档](README.md#telegram-广告屏蔽)**
+
+### 2. 美团开屏广告屏蔽插件 🆕
+移除美团 App 启动时的开屏广告，加快应用启动速度。
+
+**[查看详细文档](README_MEITUAN.md)**
+
+---
+
+## Telegram 广告屏蔽
 
 ## ✨ 功能特性
 

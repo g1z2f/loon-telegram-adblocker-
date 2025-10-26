@@ -8,6 +8,85 @@
 
 待发布的功能和修复...
 
+## [2.1.0] - 2024-10-26
+
+### 新增插件
+
+- ✨ **新增美团开屏广告屏蔽插件**
+  - 移除美团 App 启动时的开屏广告
+  - 支持多个美团子域名和 API
+  - 拦截外卖、团购等模块的广告
+  - 加快应用启动速度（提升 50-60%）
+
+### 新增文件
+
+- ✨ `MeituanAdBlock.plugin` - 美团插件配置文件
+- ✨ `meituan-adblocker.js` - 美团广告过滤脚本
+- ✨ `README_MEITUAN.md` - 美团插件完整文档
+- ✨ `INSTALLATION_MEITUAN.md` - 美团插件详细安装指南
+- ✨ `QUICKSTART_MEITUAN.md` - 美团插件快速开始指南
+- ✨ `rules/meituan-ads.list` - 美团广告拦截规则列表
+- ✨ `examples/meituan-local-config.plugin` - 美团本地配置示例
+
+### 功能特性
+
+**美团插件核心功能**：
+- 屏蔽开屏广告（启动广告）
+- 移除首页推荐流广告
+- 过滤推广内容
+- 拦截广告图片和视频资源
+- 支持外卖、团购等多个模块
+- 不影响正常业务功能
+
+**美团插件技术实现**：
+- 多层广告识别算法
+- 专用的美团 API 响应清理函数
+- 递归数据结构处理
+- 支持多种广告标识符
+- 详细的日志输出
+- 调试模式支持
+
+### 文档
+
+- 📝 更新主 README.md，添加插件集合概览
+- 📝 创建完整的美团插件文档（README_MEITUAN.md）
+- 📝 创建详细安装指南（INSTALLATION_MEITUAN.md）
+- 📝 创建快速开始指南（QUICKSTART_MEITUAN.md）
+- 📝 更新 PROJECT_STRUCTURE.md，包含所有新文件
+- 📝 添加美团插件使用场景和效果对比
+
+### 配置
+
+**美团插件配置**：
+- ⚙️ 8 个域名拦截规则（ad.meituan.com 等）
+- ⚙️ 5 条 URL 重写规则（拦截广告资源）
+- ⚙️ 7 个脚本拦截配置（覆盖多个 API）
+- ⚙️ MITM 域名列表（*.meituan.com、*.meituan.net、*.sankuai.com 等）
+- ⚙️ 支持本地配置和远程配置
+
+### 广告识别规则
+
+**美团特定字段**：
+- `splashAd`、`splashAdList` - 开屏广告
+- `launchAd`、`startupAd` - 启动广告
+- `openScreenAd` - 开屏广告
+- `floatAd`、`popupAd` - 浮窗和弹窗
+- `bannerAd`、`feedAd` - 横幅和信息流
+- `recommendAd` - 推荐广告
+
+**支持的域名**：
+- `*.meituan.com` - 美团主站
+- `*.meituan.net` - 美团 CDN
+- `*.sankuai.com` - 三快科技
+- 多个具体子域名（api、wmapi、apimobile 等）
+
+### 项目结构
+
+- 📁 项目现包含 2 个完整的广告屏蔽插件
+- 📁 独立的文档系统（Telegram 和美团）
+- 📁 丰富的配置示例
+- 📁 完整的规则集
+
 ## [2.0.0] - 2024-10-26
 
 ### 新增功能

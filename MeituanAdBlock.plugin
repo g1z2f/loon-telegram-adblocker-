@@ -1,0 +1,55 @@
+#!name=美团开屏广告屏蔽
+#!desc=屏蔽美团 App 启动时的开屏广告，加快应用启动速度
+#!author=Loon Meituan AdBlocker
+#!homepage=https://github.com/g1z2f/loon-telegram-adblocker-
+#!icon=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Meituan.png
+#!openUrl=https://www.meituan.com
+#!tag=广告屏蔽
+#!system=ios
+#!loon_version=3.2.0
+
+[Rule]
+# 屏蔽美团广告相关域名
+DOMAIN,ad.meituan.com,REJECT
+DOMAIN,ads.meituan.com,REJECT
+DOMAIN,analytics.meituan.com,REJECT
+DOMAIN,tracker.meituan.com,REJECT
+DOMAIN,adlog.meituan.com,REJECT
+DOMAIN,report.meituan.com,REJECT
+DOMAIN-SUFFIX,adashx.m.taobao.com,REJECT
+DOMAIN-SUFFIX,apoll.m.taobao.com,REJECT
+
+[URL Rewrite]
+# 屏蔽开屏广告图片和视频资源
+^https?:\/\/img\.meituan\.net\/(adunion|advertisement|mallcube|ad)\/.+ - reject
+^https?:\/\/p\d\.meituan\.net\/(adunion|advertisement|mallcube|ad)\/.+ - reject
+^https?:\/\/s3plus\.meituan\.net\/.+\/(ad|splash|launch)\/.+ - reject
+^https?:\/\/.*\.meituan\.com\/.*\/ad\/.+ - reject
+^https?:\/\/.*\.meituan\.com\/.*\/splash\/.+ - reject
+
+[Script]
+# 处理美团启动配置接口，移除开屏广告数据
+http-response ^https?:\/\/peisongapi\.meituan\.com\/.*\/ad\/.* script-path=https://raw.githubusercontent.com/g1z2f/loon-telegram-adblocker-/main/meituan-adblocker.js, requires-body=true, timeout=30, tag=美团去广告-配送
+
+# 处理美团主站 API 中的广告数据
+http-response ^https?:\/\/api\.meituan\.com\/.*\/ad.* script-path=https://raw.githubusercontent.com/g1z2f/loon-telegram-adblocker-/main/meituan-adblocker.js, requires-body=true, timeout=30, tag=美团去广告-API
+
+# 处理美团启动页配置
+http-response ^https?:\/\/.*\.meituan\.com\/.*\/(splash|launch|startup|config).* script-path=https://raw.githubusercontent.com/g1z2f/loon-telegram-adblocker-/main/meituan-adblocker.js, requires-body=true, timeout=30, tag=美团去广告-启动页
+
+# 处理外卖启动配置
+http-response ^https?:\/\/wmapi\.meituan\.com\/api\/.*\/(splash|launch|startup|ad).* script-path=https://raw.githubusercontent.com/g1z2f/loon-telegram-adblocker-/main/meituan-adblocker.js, requires-body=true, timeout=30, tag=美团去广告-外卖
+
+# 处理美团通用配置接口
+http-response ^https?:\/\/apimobile\.meituan\.com\/.* script-path=https://raw.githubusercontent.com/g1z2f/loon-telegram-adblocker-/main/meituan-adblocker.js, requires-body=true, timeout=30, tag=美团去广告-移动端
+
+# 处理三快科技相关广告接口
+http-response ^https?:\/\/.*\.sankuai\.com\/.*\/(ad|splash|launch).* script-path=https://raw.githubusercontent.com/g1z2f/loon-telegram-adblocker-/main/meituan-adblocker.js, requires-body=true, timeout=30, tag=美团去广告-三快
+
+# 处理首页推荐流中的广告
+http-response ^https?:\/\/.*\.meituan\.com\/.*\/homepage.* script-path=https://raw.githubusercontent.com/g1z2f/loon-telegram-adblocker-/main/meituan-adblocker.js, requires-body=true, timeout=30, tag=美团去广告-首页
+
+[MITM]
+hostname = *.meituan.com, *.meituan.net, *.sankuai.com, img.meituan.net, p*.meituan.net, s3plus.meituan.net, api.meituan.com, wmapi.meituan.com, apimobile.meituan.com, peisongapi.meituan.com
+
+
