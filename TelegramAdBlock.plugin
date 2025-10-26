@@ -1,69 +1,140 @@
-#!name = Telegram 去广告
-#!desc = 尝试屏蔽 Telegram 频道中的赞助广告（Web版）。注意：由于 Telegram 使用 MTProto 加密协议，原生 App 的广告无法通过 MITM 拦截。
-#!openUrl = https://telegram.org
+#!name = Telegram 去广告（iOS 原生 App）
+#!desc = 尝试屏蔽 iOS Telegram 原生 App 频道中的赞助广告。包含实验性方案，效果需实测验证。
+#!openUrl = https://apps.apple.com/app/telegram-messenger/id686449807
 #!author = loon-telegram-adblocker
-#!tag = 去广告
+#!tag = 去广告, Telegram
 #!system = iOS, iPadOS
 #!loon_version = 3.2.0
 #!homepage = https://github.com/g1z2f/loon-telegram-adblocker-
 #!icon = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png
-#!date = 2024-10-26 18:00:00
+#!date = 2024-10-26 20:00:00
 #############################################
-# 技术说明：
-# Telegram 原生应用使用 MTProto 协议，这是一个端到端加密的专有协议
-# MITM 无法解密 MTProto 流量，因此无法拦截原生 App 中的赞助消息
-# 
-# 本插件仅能尝试拦截：
-# 1. Telegram Web 版本的广告请求（web.telegram.org）
-# 2. 可能的外部广告域名（如存在）
-# 3. 第三方广告服务域名
-# 
-# 对于原生 iOS/Android Telegram App：
-# - 频道赞助消息（蓝色"广告"标签）通过 MTProto 传输，无法拦截
-# - 建议使用 Telegram Premium 订阅以官方移除广告
-# - 或使用第三方客户端（如 Nicegram）查看是否有去广告功能
+# iOS 原生 Telegram 去广告 - 实验性方案
+#
+# 技术背景：
+# - Telegram 主要使用 MTProto 协议（加密，MITM 无法解密）
+# - 但广告相关的某些资源可能通过 HTTPS 加载
+# - 本插件尝试多种拦截方式
+#
+# 策略说明：
+# 1. 拦截 Telegram CDN 上的广告资源（图片、视频）
+# 2. 尝试拦截可能的广告 API 端点
+# 3. 阻止第三方广告服务域名
+# 4. DNS 级别拦截可能的广告服务器
+#
+# ⚠️ 重要说明：
+# - 由于 MTProto 加密，效果可能有限
+# - 需要实际测试验证
+# - 如效果不佳，建议使用 Telegram Premium
+#
+# 测试方法：
+# 1. 启用插件并开启 Loon VPN
+# 2. 访问大型频道（订阅数>10万）
+# 3. 查看是否还有"广告"标签的赞助消息
+# 4. 查看 Loon 日志确认是否拦截到请求
 #############################################
-# "reject"        策略返回 HTTP 状态码 404,不附带任何额外内容
-# "reject-200"    策略返回 HTTP 状态码 200,不附带任何额外内容
-# "reject-img"    策略返回 HTTP 状态码 200,同时附带 1px gif
-# "reject-dict"   策略返回 HTTP 状态码 200,同时附带一个空的 JSON 对象
-# "reject-array"  策略返回 HTTP 状态码 200,同时附带一个空的 JSON 数组
-# "reject-drop"   拒绝并丢弃请求，且不会返回任何响应
+# Loon 拒绝策略说明：
+# "reject"        - 返回 HTTP 404
+# "reject-200"    - 返回 HTTP 200（空内容）
+# "reject-dict"   - 返回空 JSON 对象 {}
+# "reject-array"  - 返回空 JSON 数组 []
+# "reject-drop"   - 丢弃请求不响应
+# "reject-img"    - 返回 1x1 透明图片
 #############################################
 
 [Rule]
-# 屏蔽可能的第三方广告域名（非官方广告服务）
-# 注意：这些域名并非 Telegram 官方使用，仅作预防性拦截
+# ===== 第三方广告域名拦截 =====
+# 这些不是 Telegram 官方域名，但可能用于广告投放
 DOMAIN-SUFFIX, telega.io, REJECT
 DOMAIN-SUFFIX, tgads.io, REJECT
 DOMAIN-SUFFIX, tgadvertise.com, REJECT
 DOMAIN-SUFFIX, telegram-ads.com, REJECT
+DOMAIN-SUFFIX, tg-ads.com, REJECT
+DOMAIN-SUFFIX, telegramads.org, REJECT
 
-# 屏蔽常见的追踪和分析服务
+# ===== 可能的广告服务域名 =====
+# 基于社区反馈和分析的可能广告相关域名
+DOMAIN-KEYWORD, adsgram, REJECT
+DOMAIN-KEYWORD, sponsor-api, REJECT
+DOMAIN-KEYWORD, sponsored-api, REJECT
+
+# ===== 追踪和分析服务 =====
 # Telegram 可能使用的第三方分析服务
 DOMAIN-SUFFIX, graph.facebook.com, REJECT
 DOMAIN-SUFFIX, graph.instagram.com, REJECT
+DOMAIN-SUFFIX, connect.facebook.net, REJECT
+
+# ===== Telegram 官方域名中的广告路径 =====
+# 尝试拦截可能的广告 API 端点
+# 注意：这些可能不存在，仅作实验性尝试
+URL-REGEX, ^https?:\/\/.+\.telegram\.org\/.*sponsored.*, REJECT-DROP
+URL-REGEX, ^https?:\/\/.+\.telegram\.org\/.*\/ads?\/, REJECT-DROP
+URL-REGEX, ^https?:\/\/.+\.t\.me\/.*sponsored.*, REJECT-DROP
 
 [Rewrite]
-# 尝试拦截 Web 版本的广告相关请求
-# 这些规则主要针对 web.telegram.org
+# ===== URL 重写规则 =====
+# 拦截可能的广告相关 URL 模式
+
+# Telegram Web 版广告（作为补充）
+^https?:\/\/web\.telegram\.org\/.+\/ads\/ reject-drop
 ^https?:\/\/telegram\.me\/adsgram reject-drop
 ^https?:\/\/telegram\.org\/adsgram reject-drop
-^https?:\/\/.+\.telegram\.org\/.+\/sponsor reject-drop
-^https?:\/\/.+\.telegram\.org\/.+\/promoted reject-drop
-^https?:\/\/web\.telegram\.org\/.+\/ads\/ reject-drop
+
+# 尝试拦截可能的 API 路径
+^https?:\/\/.+\.telegram\.org\/api.*sponsored reject-dict
+^https?:\/\/.+\.telegram\.org\/.*getSponsoredMessages reject-array
+
+# CDN 广告资源拦截（实验性）
+^https?:\/\/.+cdn.*\.telegram\.org\/.*sponsor.* reject-img
+^https?:\/\/.+cdn.*\.telegram\.org\/.*\/ad[s]?\/ reject-img
 
 [Script]
-# 处理 Telegram Web 版 API 响应
-# 注意：这仅对 Web 版本有效，对原生 App 无效
+# ===== JavaScript 响应处理 =====
+
+# Web 版本处理（作为补充）
 http-response ^https?:\/\/web\.telegram\.org\/\w+\/api$ script-path=https://raw.githubusercontent.com/g1z2f/loon-telegram-adblocker-/main/telegram-adblocker.js, requires-body=true, timeout=30, tag=Telegram-Web去广告
 
-# 理论上的 API 拦截（实际效果有限）
-# 由于 MTProto 加密，这些规则通常不会被触发
-http-response ^https?:\/\/api\.telegram\.org\/.+$ script-path=https://raw.githubusercontent.com/g1z2f/loon-telegram-adblocker-/main/telegram-adblocker.js, requires-body=true, timeout=30, tag=Telegram-API去广告, enable=false
+# 尝试拦截可能的 HTTPS API（实验性）
+# 虽然主消息通过 MTProto，但某些 API 可能用 HTTPS
+http-response ^https?:\/\/api\.telegram\.org\/.*$ script-path=https://raw.githubusercontent.com/g1z2f/loon-telegram-adblocker-/main/telegram-adblocker.js, requires-body=true, timeout=30, tag=Telegram-API实验, enable=false
+
+# CDN 图片响应处理（实验性）
+http-response ^https?:\/\/.+cdn.*\.telegram\.org\/file\/.+$ script-path=https://raw.githubusercontent.com/g1z2f/loon-telegram-adblocker-/main/telegram-adblocker.js, requires-body=false, timeout=30, tag=Telegram-CDN过滤, enable=false
 
 [MITM]
+# ===== MITM 域名配置 =====
+# 仅拦截可能有 HTTPS 流量的域名
+# 注意：Telegram 主要使用 MTProto，这些域名可能无效果
+
 hostname = web.telegram.org
 
-# 以下域名由于 MTProto 协议加密，MITM 通常无效，因此不包含
-# api.telegram.org, apiv2.telegram.org, apiv3.telegram.org
+# 以下域名为实验性配置，默认不启用（需手动添加）
+# 如果发现有效，可以取消注释测试：
+# hostname = web.telegram.org, *.cdn.telegram.org
+
+# 以下域名使用 MTProto 协议，MITM 通常无效：
+# api.telegram.org (MTProto over TLS)
+# apiv2.telegram.org (MTProto)
+# apiv3.telegram.org (MTProto)
+
+#############################################
+# 使用说明：
+# 
+# 1. 确保已安装并信任 Loon 的 MITM 证书
+# 2. 启用本插件
+# 3. 开启 Loon VPN
+# 4. 打开 Telegram，访问大型频道
+# 5. 查看 Loon 日志，确认是否拦截到请求
+#
+# 如果无效果：
+# - 可以尝试启用被禁用的脚本（修改 enable=false 为 enable=true）
+# - 可以尝试添加更多 MITM 域名
+# - 最终建议：订阅 Telegram Premium ($4.99/月)
+#
+# 报告问题：
+# 如果测试后有效果（或无效果），请反馈：
+# - Telegram 版本号
+# - iOS 版本
+# - 是否看到日志中的拦截记录
+# - 广告是否减少或消失
+#############################################

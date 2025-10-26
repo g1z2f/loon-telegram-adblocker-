@@ -9,11 +9,15 @@ iOS Loon 应用的广告屏蔽插件集合，包含多个常用 App 的广告屏
 
 ## 📦 包含的插件
 
-### 1. Telegram 去广告插件 ⚠️
+### 1. Telegram 去广告插件 ⚠️ 🆕 支持 iOS 原生 App
 
-尝试屏蔽 Telegram 频道中的赞助广告，但受技术限制效果有限。
+尝试屏蔽 iOS Telegram **原生 App** 频道中的赞助广告。采用实验性多层拦截策略，效果需实测验证。
 
-**[查看详细文档](#telegram-去广告-重要技术说明)**
+**🎯 目标用户：** iOS Telegram 原生应用用户  
+**⚡ 技术方案：** 多层过滤 + 实验性 HTTPS 拦截  
+**⚠️ 重要说明：** 由于 MTProto 协议限制，效果可能有限，建议配合 Telegram Premium 使用
+
+**[iOS 原生 App 专用指南](README_IOS_NATIVE.md)** | **[技术说明](#telegram-去广告-重要技术说明)**
 
 ### 2. 美团去广告插件 ✅
 
