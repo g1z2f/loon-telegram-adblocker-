@@ -14,8 +14,12 @@ iOS Loon 应用的广告屏蔽插件集合，包含多个常用 App 的广告屏
 
 **[查看详细文档](README.md#telegram-广告屏蔽)**
 
-### 2. 美团开屏广告屏蔽插件 🆕
-移除美团 App 启动时的开屏广告，加快应用启动速度。
+### 2. 美团去广告插件 🆕
+基于成熟仓库重写的美团 App 开屏广告拦截插件，格式规范、规则精准、效果显著。
+
+参考来源：
+- [fmz200/wool_scripts](https://github.com/fmz200/wool_scripts)
+- [PixivCat/Loon](https://github.com/PixivCat/Loon)
 
 **[查看详细文档](README_MEITUAN.md)**
 

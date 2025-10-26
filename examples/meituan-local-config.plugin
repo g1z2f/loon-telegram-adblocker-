@@ -1,30 +1,39 @@
-#!name=美团开屏广告屏蔽（本地配置版本）
-#!desc=使用本地脚本的美团开屏广告屏蔽配置示例
-#!author=Loon Meituan AdBlocker
+#!name=美团去广告（本地配置示例）
+#!desc=使用本地脚本文件的配置示例
+#!author=Loon AdBlocker
 #!homepage=https://github.com/g1z2f/loon-telegram-adblocker-
 #!icon=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Meituan.png
-#!tag=广告屏蔽
-#!system=ios
-#!loon_version=3.2.0
+#!openUrl=https://apps.apple.com/cn/app/id423084029
+#!tag=去广告, 本地配置
+
+# 本配置展示如何使用本地托管的脚本文件
+# 适合需要自定义脚本或离线使用的用户
 
 [Rule]
-# 屏蔽美团广告相关域名
+# 美团广告域名拦截
 DOMAIN,ad.meituan.com,REJECT
 DOMAIN,ads.meituan.com,REJECT
 DOMAIN,analytics.meituan.com,REJECT
-DOMAIN,tracker.meituan.com,REJECT
+DOMAIN,adlog.meituan.com,REJECT
+DOMAIN,report.meituan.com,REJECT
 
 [URL Rewrite]
-# 屏蔽开屏广告图片和视频资源
-^https?:\/\/img\.meituan\.net\/(adunion|advertisement|mallcube|ad)\/.+ - reject
-^https?:\/\/p\d\.meituan\.net\/(adunion|advertisement|mallcube|ad)\/.+ - reject
-^https?:\/\/.*\.meituan\.com\/.*\/splash\/.+ - reject
+# 开屏广告资源
+^https?:\/\/img\.meituan\.net\/(adunion|advertisement|mallcube|bizad)\/.+ - reject-dict
+^https?:\/\/p\d\.meituan\.net\/(adunion|advertisement|mallcube|bizad)\/.+ - reject-dict
+
+# 广告接口
+^https?:\/\/(api|wmapi|peisongapi)\.meituan\.com\/.+\/advert - reject-dict
+^https?:\/\/.*\.meituan\.com\/.*\/splash\/ - reject-dict
 
 [Script]
-# 注意：将 script-path 中的 URL 替换为您的本地服务器地址或自托管 URL
-http-response ^https?:\/\/.*\.meituan\.com\/.*\/(splash|launch|startup|config).* script-path=http://localhost:8080/meituan-adblocker.js, requires-body=true, timeout=30, tag=美团去广告-启动页
+# 使用本地脚本文件（需要先将脚本文件添加到 Loon 本地脚本）
+# 将下面的路径替换为您的本地脚本路径
 
-http-response ^https?:\/\/wmapi\.meituan\.com\/api\/.*\/(splash|launch|startup|ad).* script-path=http://localhost:8080/meituan-adblocker.js, requires-body=true, timeout=30, tag=美团去广告-外卖
+# http-response ^https?:\/\/api\.meituan\.com\/v\d+\/(ad|launch|splash) script-path=/path/to/local/meituan-adblocker.js, requires-body=true, timeout=30, tag=美团去广告-本地
+
+# 或者使用自己的服务器托管脚本
+# http-response ^https?:\/\/api\.meituan\.com\/v\d+\/(ad|launch|splash) script-path=https://your-domain.com/scripts/meituan-adblocker.js, requires-body=true, timeout=30, tag=美团去广告-自托管
 
 [MITM]
 hostname = *.meituan.com, *.meituan.net, *.sankuai.com
