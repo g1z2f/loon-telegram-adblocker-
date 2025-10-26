@@ -200,7 +200,7 @@ function removeAds(obj) {
 
 - 查看主 [README.md](../README.md)
 - 阅读 [INSTALLATION.md](../INSTALLATION.md)
-- 访问 [GitHub Issues](https://github.com/loon-telegram-adblocker/issues)
+- 访问 [GitHub Issues](https://github.com/g1z2f/loon-telegram-adblocker-/issues)
 
 ---
 

@@ -108,9 +108,9 @@
 
 ## 链接
 
-- [项目主页](https://github.com/loon-telegram-adblocker/loon-telegram-adblocker)
-- [问题反馈](https://github.com/loon-telegram-adblocker/loon-telegram-adblocker/issues)
-- [讨论区](https://github.com/loon-telegram-adblocker/loon-telegram-adblocker/discussions)
+- [项目主页](https://github.com/g1z2f/loon-telegram-adblocker-)
+- [问题反馈](https://github.com/g1z2f/loon-telegram-adblocker-/issues)
+- [讨论区](https://github.com/g1z2f/loon-telegram-adblocker-/discussions)
 
 ---
 
