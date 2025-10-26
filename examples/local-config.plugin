@@ -1,0 +1,35 @@
+#!name=Telegram 广告屏蔽（本地配置示例）
+#!desc=本地托管版本的 Telegram 广告屏蔽插件配置示例
+#!author=Loon Telegram AdBlocker
+#!homepage=https://github.com/loon-telegram-adblocker
+#!icon=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png
+#!tag=广告屏蔽, 本地配置
+
+# 本文件展示如何配置使用本地托管的脚本文件
+# 适用于需要自定义修改或无法访问 GitHub 的用户
+
+[Rule]
+# 基础广告域名拦截
+DOMAIN-SUFFIX,telega.io,REJECT
+DOMAIN-SUFFIX,tgads.io,REJECT
+DOMAIN-SUFFIX,tgadvertise.com,REJECT
+
+# 第三方追踪
+DOMAIN-SUFFIX,graph.facebook.com,REJECT
+DOMAIN-SUFFIX,connect.facebook.net,REJECT
+
+[URL Rewrite]
+# 直接拒绝广告相关 URL
+^https?:\/\/telegram\.me\/adsgram - reject
+^https?:\/\/telegram\.org\/adsgram - reject
+
+[Script]
+# 使用本地脚本文件（需要先上传到可访问的服务器）
+# 替换下面的 YOUR_LOCAL_SERVER_URL 为您的实际地址
+http-response ^https?:\/\/.*\.telegram\.org\/.*$ script-path=http://YOUR_LOCAL_SERVER_URL/telegram-adblocker.js, requires-body=true, timeout=30, tag=Telegram去广告
+
+# 如果使用 iCloud Drive 或其他云存储
+# http-response ^https?:\/\/.*\.telegram\.org\/.*$ script-path=https://YOUR_CLOUD_URL/telegram-adblocker.js, requires-body=true, timeout=30, tag=Telegram去广告
+
+[MITM]
+hostname = *.telegram.org, api.telegram.org
