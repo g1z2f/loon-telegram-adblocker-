@@ -1,0 +1,74 @@
+defaults:
+  output_dir: outputs
+  language: zh
+
+scripts:
+  max_duration_seconds: 55
+  speech_rate_wpm: 165
+
+tts:
+  engine: piper
+  voice: zh-CN
+  sample_rate: 22050
+  words_per_minute: 160
+  cache_dir: outputs/cache/tts
+  padding_ms: 160
+
+media:
+  use_stock: false
+  stock_provider: pexels
+  pexels_api_key_env: PEXELS_API_KEY
+  pixabay_api_key_env: PIXABAY_API_KEY
+  fonts:
+    primary: null
+    secondary: null
+  palette:
+    backgrounds:
+      - "#111722"
+      - "#23263a"
+      - "#13283b"
+      - "#3b1640"
+      - "#451e2d"
+    text_color: "#ffffff"
+    highlight_color: "#ffd400"
+
+video:
+  fps: 30
+  resolution:
+    width: 1080
+    height: 1920
+  progress_bar:
+    fill_color: "#ffd400"
+    background: "#1f1f1f"
+    height: 18
+    margin: 36
+  watermark:
+    text: "Shorts Auto"
+    position: bottom-right
+    opacity: 0.75
+    color: "#ffffff"
+
+audio:
+  sample_rate: 44100
+  bgm:
+    enabled: true
+    library_dir: assets/bgm
+    target_dbfs: -18.0
+    ducking_reduction_db: 16
+
+metadata:
+  tag_count: 15
+  hashtag_prefix: "#"
+
+compliance:
+  banned_words:
+    - 暴力
+    - 攻击
+    - 仇恨
+  banned_hashtags:
+    - "#暴力"
+
+uploader:
+  default_privacy: unlisted
+  client_secrets_file: secrets/client_secret.json
+  credentials_file: secrets/token.json

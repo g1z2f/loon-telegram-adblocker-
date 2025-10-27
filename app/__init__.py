@@ -1,0 +1,1 @@
+"""Shorts automation package."""
