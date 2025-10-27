@@ -1,0 +1,5 @@
+Hook: Here is what nobody tells you about {topic} in under a minute.
+Point 1: The first thing you need to know about {topic} is this key insight.
+Point 2: Here's a practical tip you can try today related to {topic}.
+Point 3: Remember this final takeaway so {topic} sticks with you.
+Outro: Follow for more bite-sized lessons on {topic}!
